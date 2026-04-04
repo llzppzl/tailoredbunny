@@ -9,7 +9,7 @@
 TailoredBunny 是一个让 AI Agent 拥有"性格"的项目。像切换 superpowers skill 一样，随时切换 MBTI 人格模式，并且在日常交互中不断进化，越来越贴近用户期待的"性格"。
 
 **Phase 1 目标**:
-1. 实现 MBTI 模式切换 —— 用户说 `infp` 或 `intj`，AI 立即切换对话风格
+1. 实现 MBTI 模式切换 —— 用户说任意 MBTI 类型，AI 立即切换对话风格
 2. 实现进化机制 —— baseline + customized 合并，通过反馈不断调整
 
 ---
@@ -17,17 +17,17 @@ TailoredBunny 是一个让 AI Agent 拥有"性格"的项目。像切换 superpow
 ## 核心流程
 
 ```
-用户: intj
+用户: entj
     ↓
-AI 加载 skills/mbti-intj.md（baseline）
+AI 加载 skills/mbti-entj.md（baseline）
     ↓
-AI 加载 memory/customized-intj.md（你的私人部分）
+AI 加载 memory/customized-entj.md（你的私人部分）
     ↓
-两者合并 = 完整的 INTJ 风格
+两者合并 = 完整的 ENTJ 风格
     ↓
-用户给反馈（"太啰嗦了"）
+用户给反馈（"太直接了"）
     ↓
-AI 更新 memory/customized-intj.md
+AI 更新 memory/customized-entj.md
     ↓
 下次加载，你的私人部分增强
 ```
@@ -39,21 +39,26 @@ AI 更新 memory/customized-intj.md
 ```
 tailoredbunny/
 ├── skills/
-│   ├── mbti-intj.md           # INTJ 通用 baseline
-│   └── mbti-infp.md           # INFP 通用 baseline
+│   ├── mbti-intj.md           # INTJ 冷酷幕僚长
+│   ├── mbti-infp.md           # INFP 知心搭档
+│   ├── mbti-intp.md           # INTP 逻辑学家
+│   ├── mbti-infj.md           # INFJ 提倡者
+│   ├── mbti-istj.md           # ISTJ 物流师
+│   ├── mbti-isfj.md           # ISFJ 守卫者
+│   ├── mbti-istp.md           # ISTP 鉴赏家
+│   ├── mbti-isfp.md           # ISFP 探险家
+│   ├── mbti-entj.md           # ENTJ 指挥官
+│   ├── mbti-entp.md           # ENTP 辩论家
+│   ├── mbti-enfj.md           # ENFJ 主人公
+│   ├── mbti-enfp.md           # ENFP 竞选者
+│   ├── mbti-estj.md           # ESTJ 总经理
+│   ├── mbti-estp.md           # ESTP 企业家
+│   ├── mbti-esfj.md           # ESFJ 供给者
+│   └── mbti-esfp.md           # ESFP 表演者
 ├── memory/
 │   ├── customized-intj.md     # INTJ 私人进化版
 │   ├── customized-infp.md     # INFP 私人进化版
-│   └── user-personality.json   # 用户人格记录
-├── presets/
-│   ├── intro-prompt.md        # 入口引导（备用）
-│   ├── preset-intj-strategist.md
-│   └── preset-infp-companion.md
-├── src/
-│   ├── detector.py             # MBTI 检测器
-│   ├── loader.py               # 预设加载器
-│   └── memory.py               # 记忆模块
-├── tests/
+│   └── customized-*.md         # 其他类型私人进化版
 ├── docs/
 ├── CLAUDE.md                   # 项目说明（自动加载）
 ├── README.md
@@ -91,56 +96,32 @@ tailoredbunny/
 ## 使用方式
 
 1. Claude Code 加载项目时读取 `CLAUDE.md`
-2. 用户说出 MBTI 类型（如 `infp`）
-3. AI 加载 `skills/mbti-infp.md` + `memory/customized-infp.md`
+2. 用户说出 MBTI 类型（如 `entj`）
+3. AI 加载 `skills/mbti-entj.md` + `memory/customized-entj.md`
 4. 两者合并后切换对话风格
 5. 用户给反馈，AI 更新 customized
-
----
-
-## MBTI 预设内容
-
-### INTJ - 冷酷幕僚长
-
-**风格**：直接给结论、不废话、MECE 表格、风险评估
-
-**交互层**：N型（底层逻辑）、T型（冷酷逻辑）、I型（直接给结论）
-**架构层**：J型（瀑布流）、红蓝对抗
-**记忆层**：雷区、北极星
-
-### INFP - 知心搭档
-
-**风格**：先肯定情绪、再给建议、温和、支持
-
-**交互层**：N型（愿景）、F型（情绪价值）、E型（允许讨论）
-**架构层**：P型（敏捷迭代）、微步前进
-**记忆层**：雷区、北极星
 
 ---
 
 ## 技术约束
 
 - **预设格式**: Markdown，纯文本
-- **记忆存储**: JSON 文件 + Markdown
-- **无外部依赖**: Phase 1 保持轻量
-- **Python 版本**: 3.10+
+- **无代码依赖**: 完全基于文件操作
+- **轻量**: 无外部依赖
 
 ---
 
 ## 成功标准
 
-1. 用户说 `infp` → AI 用 INFP 风格对话
-2. 用户说 `intj` → AI 用 INTJ 风格对话
-3. 随时可以切换，不限次数
-4. 反馈自动更新 customized 文件
-5. 下次加载时进化效果保留
-6. 可添加更多 MBTI 类型
+1. 用户说任意 MBTI 类型 → AI 用对应风格对话
+2. 随时可以切换，不限次数
+3. 反馈自动更新 customized 文件
+4. 下次加载时进化效果保留
 
 ---
 
 ## 待 Phase 2
 
-- 更多 MBTI 预设（ENTJ、ESTJ、INTP 等）
 - 隐式观察（AI 自动分析用户回复模式）
-- 架构层的真实多 Agent 对抗
-- 记忆层的 RAG 向量检索
+- 进化算法优化
+- 可视化进化过程

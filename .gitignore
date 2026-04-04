@@ -1,0 +1,5 @@
+# TailoredBunny 本地文件
+# 这些文件只保存在本地，不提交到 git
+
+memory/customized-*.md
+memory/user-personality.json

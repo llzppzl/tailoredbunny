@@ -14,13 +14,30 @@ AI:   已切换到 INFP 模式
 AI:   已切换到 INTJ 模式
 ```
 
+## 文件结构
+
+| 文件 | 用途 |
+|------|------|
+| `skills/mbti-*.md` | 通用 baseline（不变） |
+| `memory/customized-*.md` | 你的私人进化版 |
+
+## 进化机制
+
+**Baseline** = 通用 INTJ/INFP 风格（不变）
+**Customized** = 你的私人调整（会累积）
+
+切换模式时，两者**合并** = 完整的风格
+
+**怎么进化：**
+1. 你给反馈（如"太啰嗦了"）
+2. AI 更新 `memory/customized-*.md`
+3. 下次加载时，你的私人部分增强
+
 ## 使用方式
 
-在 Claude Code 中加载项目后，说出 MBTI 类型即可切换：
+在 Claude Code 中加载项目后：
 - `infp` → 知心搭档模式（温和、支持、每次一点点）
 - `intj` → 冷酷幕僚长模式（直接给结论、MECE 表格）
-
-预设内容在 `skills/mbti-*.md`，可自行添加更多类型。
 
 ## 支持的 MBTI 类型
 

@@ -14,10 +14,10 @@
 
 ## 进化流程
 
-1. 切换模式时，加载 `memory/customized-*.md`（如果存在）
-2. 如果不存在，加载 `skills/mbti-*.md`
+1. 切换模式时，先加载 `skills/mbti-*.md`（baseline）
+2. 再加载 `memory/customized-*.md`（你的版本，覆盖/补充 baseline）
 3. 你给反馈（如"太啰嗦了"）→ 我更新 `memory/customized-*.md`
-4. 下次加载时用你的进化版本
+4. 下次加载时，你的版本叠加在 baseline 上
 
 ## 当前模式
 

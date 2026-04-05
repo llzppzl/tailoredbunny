@@ -118,6 +118,8 @@ AI: 收到，已更新你的偏好
 
 | 文件 | 用途 |
 |------|------|
+| `using-tailoredbunny.md` | MBTI 切换 skill 机制 |
+| `CLAUDE.md` | 项目指令（AI 自动加载） |
 | `skills/mbti-*.md` | 通用 baseline（不变） |
 | `memory/customized-*.md` | 你的私人进化版（本地，不上传 git） |
 

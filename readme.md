@@ -96,10 +96,12 @@ cd tailoredbunny
 3. 从 memory/customized-{type}.md 加载私人偏好（如果存在）
 4. 两者合并使用
 
-当用户给反馈（如"太啰嗦了"、"需要更委婉"）时：
-1. 在 memory/customized-{type}.md 的"你的私人调整"下追加新条目
-2. 如果文件不存在，先创建
-3. 告诉用户已更新
+当用户给反馈时（任何形式的不满、抱怨、负面情绪）：
+1. 立即读取 memory/customized-{type}.md
+2. 如果不存在，先创建（模板含处理流程注释）
+3. 追加到"你的私人调整"
+4. 立即写回，重新读取确认
+5. 告诉用户已更新
 ```
 
 ### 3. 开始使用
@@ -118,7 +120,6 @@ AI: 收到，已更新你的偏好
 
 | 文件 | 用途 |
 |------|------|
-| `using-tailoredbunny.md` | MBTI 切换 skill 机制 |
 | `CLAUDE.md` | 项目指令（AI 自动加载） |
 | `skills/mbti-*.md` | 通用 baseline（不变） |
 | `memory/customized-*.md` | 你的私人进化版（本地，不上传 git） |

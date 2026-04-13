@@ -1,0 +1,182 @@
+# TailoredBunny API 提示词索引
+# 用于 API 直连模式下的提示词发现和加载
+
+version: "1.0"
+description: "TailoredBunny MBTI 性格适配提示词索引"
+
+prompts:
+  - id: "mbti-intj"
+    name: "INTJ - 冷酷幕僚长"
+    name_en: "Architect"
+    file: "../../skills/mbti-intj.md"
+    description: "战略幕僚型，独立思考，擅长长期规划"
+    mbti_category: "NT"
+    traits:
+      - "逻辑分析"
+      - "战略规划"
+      - "独立自主"
+
+  - id: "mbti-intp"
+    name: "INTP - 逻辑学家"
+    name_en: "Logician"
+    file: "../../skills/mbti-intp.md"
+    description: "理性分析型，深度思考，追求逻辑自洽"
+    mbti_category: "NT"
+    traits:
+      - "逻辑分析"
+      - "深度思考"
+      - "独立自主"
+
+  - id: "mbti-entj"
+    name: "ENTJ - 指挥官"
+    name_en: "Commander"
+    file: "../../skills/mbti-entj.md"
+    description: "果断决策型，领导力强，追求胜利"
+    mbti_category: "NT"
+    traits:
+      - "战略规划"
+      - "高效执行"
+      - "领导力"
+
+  - id: "mbti-entp"
+    name: "ENTP - 辩论家"
+    name_en: "Debater"
+    file: "../../skills/mbti-entp.md"
+    description: "创新思辨型，善于挑战，追求自由"
+    mbti_category: "NT"
+    traits:
+      - "创新思维"
+      - "逻辑辩论"
+      - "自由探索"
+
+  - id: "mbti-infj"
+    name: "INFJ - 提倡者"
+    name_en: "Advocate"
+    file: "../../skills/mbti-infj.md"
+    description: "理想主义者，洞察人心，追求意义"
+    mbti_category: "NF"
+    traits:
+      - "价值观导向"
+      - "洞察本质"
+      - "理想主义"
+
+  - id: "mbti-infp"
+    name: "INFP - 知心搭档"
+    name_en: "Mediator"
+    file: "../../skills/mbti-infp.md"
+    description: "理想主义者，真诚助人，追求自我接纳"
+    mbti_category: "NF"
+    traits:
+      - "情绪价值"
+      - "共情理解"
+      - "自我成长"
+
+  - id: "mbti-enfj"
+    name: "ENFJ - 主人公"
+    name_en: "Protagonist"
+    file: "../../skills/mbti-enfj.md"
+    description: "激励型领导者，富有魅力，追求成长"
+    mbti_category: "NF"
+    traits:
+      - "情感共鸣"
+      - "激励他人"
+      - "领导力"
+
+  - id: "mbti-enfp"
+    name: "ENFP - 竞选者"
+    name_en: "Campaigner"
+    file: "../../skills/mbti-enfp.md"
+    description: "热情创意型，灵感无限，追求可能性"
+    mbti_category: "NF"
+    traits:
+      - "创意激发"
+      - "热情激励"
+      - "自由探索"
+
+  - id: "mbti-istj"
+    name: "ISTJ - 物流师"
+    name_en: "Logistician"
+    file: "../../skills/mbti-istj.md"
+    description: "务实可靠型，有责任感，追求诚信"
+    mbti_category: "SJ"
+    traits:
+      - "务实具体"
+      - "责任担当"
+      - "诚信可靠"
+
+  - id: "mbti-isfj"
+    name: "ISFJ - 守卫者"
+    name_en: "Defender"
+    file: "../../skills/mbti-isfj.md"
+    description: "温暖守护型，忠诚可靠，默默付出"
+    mbti_category: "SJ"
+    traits:
+      - "温暖关怀"
+      - "忠诚守护"
+      - "默默付出"
+
+  - id: "mbti-estj"
+    name: "ESTJ - 总经理"
+    name_en: "Executive"
+    file: "../../skills/mbti-estj.md"
+    description: "高效执行型，务实管理，追求成功"
+    mbti_category: "SJ"
+    traits:
+      - "高效执行"
+      - "务实管理"
+      - "责任担当"
+
+  - id: "mbti-esfj"
+    name: "ESFJ - 供给者"
+    name_en: "Consul"
+    file: "../../skills/mbti-esfj.md"
+    description: "热情关怀型，社交达人，忠诚付出"
+    mbti_category: "SJ"
+    traits:
+      - "温暖关怀"
+      - "团队协作"
+      - "忠诚付出"
+
+  - id: "mbti-istp"
+    name: "ISTP - 鉴赏家"
+    name_en: "Virtuoso"
+    file: "../../skills/mbti-istp.md"
+    description: "务实动手型，灵活适应，追求效率"
+    mbti_category: "SP"
+    traits:
+      - "务实动手"
+      - "灵活适应"
+      - "追求效率"
+
+  - id: "mbti-isfp"
+    name: "ISFP - 探险家"
+    name_en: "Adventurer"
+    file: "../../skills/mbti-isfp.md"
+    description: "自由随性型，美感敏锐，追求真实"
+    mbti_category: "SP"
+    traits:
+      - "感受当下"
+      - "美感敏锐"
+      - "自由空间"
+
+  - id: "mbti-estp"
+    name: "ESTP - 企业家"
+    name_en: "Entrepreneur"
+    file: "../../skills/mbti-estp.md"
+    description: "行动冒险型，务实果断，追求破局"
+    mbti_category: "SP"
+    traits:
+      - "行动导向"
+      - "务实果断"
+      - "冒险精神"
+
+  - id: "mbti-esfp"
+    name: "ESFP - 表演者"
+    name_en: "Entertainer"
+    file: "../../skills/mbti-esfp.md"
+    description: "活力四射型，享受当下，富有感染力"
+    mbti_category: "SP"
+    traits:
+      - "活力四射"
+      - "享受当下"
+      - "社交感染"

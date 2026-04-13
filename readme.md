@@ -116,13 +116,33 @@ AI: 收到，已更新你的偏好
 
 ---
 
+## 跨平台使用
+
+TailoredBunny 支持多种平台的 Skill 加载方式：
+
+| 平台 | 使用方式 | 配置文件位置 |
+|------|----------|--------------|
+| Claude Code | 安装 MCP Server | `platform/claude/README.md` |
+| Semantic Kernel | 指向 skill 目录 | `platform/semantic-kernel/` |
+| Coze/Dify | 手动导入 | `platform/saas/IMPORT_GUIDE.md` |
+| API 直连 | 读取 prompts.yaml | `platform/api/prompts.yaml` |
+
+详细说明请参考各平台的适配文档。
+
+---
+
 ## 📁 文件结构
 
-| 文件 | 用途 |
-|------|------|
+| 文件/目录 | 用途 |
+|-----------|------|
 | `CLAUDE.md` | 项目指令（AI 自动加载） |
-| `skills/mbti-*.md` | 通用 baseline（不变） |
+| `skills/mbti-*.md` | 通用 baseline（16种 MBTI） |
 | `memory/customized-*.md` | 你的私人进化版（本地，不上传 git） |
+| `platform/` | 跨平台适配层 |
+| `platform/claude/` | Claude MCP Server 适配 |
+| `platform/semantic-kernel/` | Semantic Kernel 框架适配 |
+| `platform/saas/` | SaaS 平台（Coze/Dify）导入指南 |
+| `platform/api/` | API 直连提示词索引 |
 
 ---
 

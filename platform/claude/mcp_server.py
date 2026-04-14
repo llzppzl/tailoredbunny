@@ -17,7 +17,7 @@ from mcp.server import Server
 from mcp.types import Prompt, GetPromptResult, Tool, CallToolResult, TextContent
 
 # 服务配置
-SERVER_NAME = "tailoredbunny"
+SERVER_NAME = "mindpersona"
 SKILLS_DIR = Path(__file__).parent.parent.parent / "skills"
 MEMORY_DIR = Path(__file__).parent.parent.parent / "memory"
 PERSONAL_ADJUSTMENTS_HEADER = "## 你的私人调整"

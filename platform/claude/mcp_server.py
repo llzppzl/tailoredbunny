@@ -72,8 +72,9 @@ CUSTOMIZED_TEMPLATE = """# {mbti_type} 进化版 - 你的私人部分
 
 {{HDR}}
 
-<!-- 格式：(时间) 反馈内容 -->
 - [{timestamp}] {feedback_summary}
+
+<!-- 格式：(时间) 反馈内容 -->
 """
 
 def get_customized_template(mbti_type: str, feedback_summary: str) -> str:
@@ -109,11 +110,20 @@ def append_to_customized(mbti_type: str, feedback_summary: str) -> tuple[bool, s
 
             # 检查是否已有 PERSONAL_ADJUSTMENTS_HEADER 部分
             if PERSONAL_ADJUSTMENTS_HEADER in content:
-                # 追加到该部分末尾（下一行）
-                content = content.replace(
-                    f"{PERSONAL_ADJUSTMENTS_HEADER}\n",
-                    f"{PERSONAL_ADJUSTMENTS_HEADER}\n{new_entry}"
-                )
+                # 追加到最后一条反馈之后（而非 header 之后）
+                # 匹配形如 "- [2026-04-15 12:34] 反馈内容" 的行
+                last_entry_pattern = r"(-\s*\[[\d\s:-]+\][^\n]*\n)(?=\n|$)"
+                match = re.search(last_entry_pattern, content)
+                if match:
+                    # 插入到最后一条反馈之后
+                    insert_pos = match.end()
+                    content = content[:insert_pos] + new_entry + content[insert_pos:]
+                else:
+                    # 没有匹配到反馈条目，追加到 header 之后
+                    content = content.replace(
+                        f"{PERSONAL_ADJUSTMENTS_HEADER}\n",
+                        f"{PERSONAL_ADJUSTMENTS_HEADER}\n{new_entry}"
+                    )
             else:
                 # 没有 PERSONAL_ADJUSTMENTS_HEADER，追加到文件末尾
                 content = content.rstrip() + f"\n\n{PERSONAL_ADJUSTMENTS_HEADER}\n\n{new_entry}"
@@ -159,8 +169,8 @@ async def get_prompt(name: str, arguments: Optional[dict] = None) -> GetPromptRe
     customized_file = MEMORY_DIR / f"customized-{mbti_type.lower()}.md"
     if customized_file.exists():
         customized = customized_file.read_text(encoding="utf-8")
-        # 提取 PERSONAL_ADJUSTMENTS_HEADER 部分
-        match = re.search(rf"{PERSONAL_ADJUSTMENTS_HEADER}\s*\n(.*?)$", customized, re.DOTALL | re.MULTILINE)
+        # 提取 PERSONAL_ADJUSTMENTS_HEADER 部分（所有反馈条目）
+        match = re.search(rf"{PERSONAL_ADJUSTMENTS_HEADER}\s*\n(.*?)(?=<!-- 格式|$)", customized, re.DOTALL)
         if match:
             personal_adjustments = match.group(1).strip()
             content += f"\n\n{PERSONAL_ADJUSTMENTS_HEADER}\n\n{personal_adjustments}"

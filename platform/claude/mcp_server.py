@@ -70,7 +70,7 @@ CUSTOMIZED_TEMPLATE = """# {mbti_type} 进化版 - 你的私人部分
 <!-- 此文件与 skills/mbti-{mbti_type_lower}.md 合并 -->
 <!-- 当用户给反馈时，AI 必须更新此文件 -->
 
-{HDR}
+{{HDR}}
 
 <!-- 格式：(时间) 反馈内容 -->
 - [{timestamp}] {feedback_summary}

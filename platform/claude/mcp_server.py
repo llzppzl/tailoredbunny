@@ -13,7 +13,7 @@ import re
 from pathlib import Path
 from typing import Optional
 from mcp.server import Server
-from mcp.types import Prompt, GetPromptResult
+from mcp.types import Prompt, GetPromptResult, Tool, CallToolResult, TextContent
 
 # 服务配置
 SERVER_NAME = "tailoredbunny"
@@ -40,6 +40,72 @@ def scan_skills() -> list[dict]:
                 "description": f"TailoredBunny {mbti_type} 性格适配"
             })
     return prompts
+
+CUSTOMIZED_TEMPLATE = """# {mbti_type} 进化版 - 你的私人部分
+
+<!-- 此文件与 skills/mbti-{mbti_type_lower}.md 合并 -->
+<!-- 当用户给反馈时，AI 必须更新此文件 -->
+
+## 你的私人调整
+
+<!-- 格式：(时间) 反馈内容 -->
+- [{timestamp}] {feedback_summary}
+"""
+
+def get_customized_template(mbti_type: str, feedback_summary: str) -> str:
+    """生成 customized-{type}.md 的初始内容"""
+    from datetime import datetime
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M")
+    return CUSTOMIZED_TEMPLATE.format(
+        mbti_type=mbti_type.upper(),
+        mbti_type_lower=mbti_type.lower(),
+        timestamp=timestamp,
+        feedback_summary=feedback_summary
+    )
+
+def append_to_customized(mbti_type: str, feedback_summary: str) -> tuple[bool, str]:
+    """
+    向 customized-{type}.md 追加反馈
+    Returns: (success: bool, message: str)
+    """
+    mbti_lower = mbti_type.lower()
+    customized_file = MEMORY_DIR / f"customized-{mbti_lower}.md"
+
+    from datetime import datetime
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M")
+    new_entry = f"- [{timestamp}] {feedback_summary}\n"
+
+    try:
+        if not customized_file.exists():
+            # 文件不存在，创建并写入第一条反馈
+            content = get_customized_template(mbti_type, feedback_summary)
+            customized_file.write_text(content, encoding="utf-8")
+        else:
+            # 文件存在，追加到 ## 你的私人调整 部分
+            content = customized_file.read_text(encoding="utf-8")
+
+            # 检查是否已有 ## 你的私人调整 部分
+            if "## 你的私人调整" in content:
+                # 追加到该部分末尾（下一行）
+                content = content.replace(
+                    "## 你的私人调整\n",
+                    f"## 你的私人调整\n{new_entry}"
+                )
+            else:
+                # 没有 ## 你的私人调整，追加到文件末尾
+                content = content.rstrip() + f"\n\n## 你的私人调整\n\n{new_entry}"
+
+            customized_file.write_text(content, encoding="utf-8")
+
+        # 验证写入
+        verified = customized_file.read_text(encoding="utf-8")
+        if new_entry.strip() in verified:
+            return True, "反馈已成功写入"
+        else:
+            return False, "写入验证失败"
+
+    except Exception as e:
+        return False, f"写入失败: {str(e)}"
 
 @server.list_prompts()
 async def list_prompts() -> list[Prompt]:
@@ -80,6 +146,50 @@ async def get_prompt(name: str, arguments: Optional[dict] = None) -> GetPromptRe
         description=f"TailoredBunny {mbti_type} 性格适配",
         messages=[{"role": "user", "content": {"type": "text", "text": content}}]
     )
+
+@server.list_tools()
+async def list_tools() -> list[Tool]:
+    """列出所有可用工具"""
+    return [
+        Tool(
+            name="update_mbti_memory",
+            description="当用户表达不满、抱怨或负面情绪时，将反馈追加到 customized-{mbti_type}.md。触发条件：用户语气不满、抱怨、要求改变交流方式。",
+            inputSchema={
+                "type": "object",
+                "properties": {
+                    "mbti_type": {
+                        "type": "string",
+                        "description": "当前 MBTI 类型（如 intj, entj, infp）",
+                        "enum": ["intj", "intp", "infj", "infp", "istj", "isfj", "istp", "isfp",
+                                "entj", "entp", "enfj", "enfp", "estj", "esfj", "estp", "esfp"]
+                    },
+                    "feedback_summary": {
+                        "type": "string",
+                        "description": "用户反馈的核心诉求摘要（已总结为一句话）"
+                    }
+                },
+                "required": ["mbti_type", "feedback_summary"]
+            }
+        )
+    ]
+
+@server.call_tool()
+async def call_tool(name: str, arguments: dict) -> list[TextContent]:
+    """执行工具调用"""
+    if name == "update_mbti_memory":
+        mbti_type = arguments.get("mbti_type", "").lower()
+        feedback_summary = arguments.get("feedback_summary", "")
+
+        if not mbti_type or not feedback_summary:
+            return [TextContent(type="text", text="错误: mbti_type 和 feedback_summary 都是必填参数")]
+
+        success, message = append_to_customized(mbti_type, feedback_summary)
+        if success:
+            return [TextContent(type="text", text=f"✅ {message}\n\n文件路径: {MEMORY_DIR / f'customized-{mbti_type}.md'}")]
+        else:
+            return [TextContent(type="text", text=f"❌ {message}")]
+    else:
+        return [TextContent(type="text", text=f"未知工具: {name}")]
 
 if __name__ == "__main__":
     import mcp.server.stdio

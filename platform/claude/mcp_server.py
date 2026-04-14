@@ -54,7 +54,7 @@ async def list_prompts() -> list[Prompt]:
     ]
 
 @server.get_prompt()
-async def get_prompt(name: str) -> GetPromptResult:
+async def get_prompt(name: str, arguments: Optional[dict] = None) -> GetPromptResult:
     """当用户调用 /mbti-intj 时，读取并返回对应 prompt"""
     # 提取 MBTI 类型
     mbti_type = name.replace("mbti-", "").upper()

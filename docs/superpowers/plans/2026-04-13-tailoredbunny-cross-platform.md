@@ -402,8 +402,8 @@ if __name__ == "__main__":
 
 包含：
 1. 安装依赖步骤
-2. 配置 `claude_desktop_config.json` 的 JSON 模板（路径需用户手动修改）
-3. 重启 Claude Desktop 后使用 `/mbti-intj` 等命令触发
+2. 使用 `claude mcp add` 命令添加 MCP Server
+3. 重启 Claude Code 后使用 `/mbti-intj` 等命令触发
 
 ```markdown
 # TailoredBunny MCP Server
@@ -412,23 +412,26 @@ if __name__ == "__main__":
 
 1. 安装依赖：
    ```bash
+   cd platform/claude
    pip install -r requirements.txt
    ```
 
-2. 配置 Claude Desktop：
-   打开 `claude_desktop_config.json`，添加：
-   ```json
-   {
-     "mcpServers": {
-       "tailoredbunny": {
-         "command": "【请替换为 Python 绝对路径，如 C:\\Python310\\python.exe】",
-         "args": ["【请替换为本脚本的绝对路径，如 D:\\PROJECTS\\tailoredbunny\\platform\\claude\\mcp_server.py】"]
-       }
-     }
-   }
+2. 添加 MCP Server 到 Claude Code：
+
+
+   **获取 mcp_server.py 绝对路径：**
+   在文件管理器中右键 `platform/claude/mcp_server.py` → 复制文件路径
+
+   **运行以下命令（请替换路径）：**
+   ```bash
+   # 用户级安装（所有项目可用）
+   claude mcp add tailoredbunny -s user -- python 【mcp_server.py的绝对路径】
+
+   # 或项目级安装（仅当前项目可用，可共享给团队）
+   claude mcp add tailoredbunny -s project -- python 【mcp_server.py的绝对路径】
    ```
 
-3. 重启 Claude Desktop
+3. 重启 Claude Code（或关闭当前窗口后重新打开）
 
 ## 使用方式
 

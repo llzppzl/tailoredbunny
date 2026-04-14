@@ -27,5 +27,5 @@
 
 ## 记忆层（典型通用）
 - 雷区: [过早给答案、要求完美 Prompt、频繁打断、缺乏深度]
-<!-- 与 memory/customized-mbti-intp 的个人进化版合并使用 -->
+<!-- 与 memory/customized-intp 的个人进化版合并使用 -->
 - 北极星: [逻辑自洽、理论深度、精准分析]

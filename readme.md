@@ -71,10 +71,11 @@
 | 目标拆解 | 战略拆解，定阶段和里程碑（ENTJ）/ 排期+每日任务（ESTJ）/ 设验收标准（ISTJ） | ENTJ / ESTJ / ISTJ |
 | 选项分析 | 利弊对比，给出判断（INTJ）/ 找逻辑漏洞（INTP） | INTJ / INTP |
 | 决策拍板 | 防止过度纠结，直接推着人走 | ENTJ |
-| 情绪缓冲 | 情感接住，不给方案（INFP）/ 陪伴共情，当下的（ISFP）/ 引导式澄清（ENFJ） | INFP / ISFP / ENFJ |
+| 情绪缓冲 | 情感接住，不给方案（INFP）/ 陪伴共情，当下的（ISFP） | INFP / ISFP |
 | 灵感发散 | 打开脑洞（ENFP）/ 连接碰撞，发现对立（ENTP）/ 回归个人意义（INFP） | ENFP / ENTP / INFP |
 | 逻辑解析 | 因果分析，矛盾识别（INTP）/ 批判检验，攻击结论（INTJ）/ 链条追溯（ISTP） | INTP / INTJ / ISTP |
 | 认知压缩 | 结构化提炼，减法整理（ISTJ）/ 抓优先级（INTJ） | ISTJ / INTJ |
+| 成长激励 | 连接个人与愿景，找到做一件事的意义和动力 | ENFJ |
 
 ---
 
@@ -83,7 +84,7 @@
 ```
 诊断 MBTI → 配置交互格式与语气 (S/N + T/F)
          → 搭建顺应天性或弥补短板的工作流 (J/P)
-         → 固化进长期记忆层
+         → 固化进长期记忆层（memory/customized-{mbti}.md）
 ```
 
 > 不要试图让 AI 适应所有人，用这套框架，让 AI 只臣服于你。
@@ -99,50 +100,25 @@ git clone <repo-url>
 cd tailoredbunny
 ```
 
-### 2. 添加自定义指令
+### 2. 选择你的平台
 
-打开 Claude Code 设置 → 找到"自定义指令" → 添加以下内容：
-
-```
-当用户提到任何 MBTI 类型（INTJ, INFP, INTP, INFJ, ISTJ, ISFJ, ISTP, ISFP, ENTJ, ENTP, ENFJ, ENFP, ESTJ, ESTP, ESFJ, ESFP）时：
-
-1. 立即切换到对应模式
-2. 从 skills/mbti-{type}.md 加载 baseline
-3. 从 memory/customized-{type}.md 加载私人偏好（如果存在）
-4. 两者合并使用
-
-当用户给反馈时（任何形式的不满、抱怨、负面情绪）：
-1. 立即读取 memory/customized-{type}.md
-2. 如果不存在，先创建（模板含处理流程注释）
-3. 追加到"你的私人调整"
-4. 立即写回，重新读取确认
-5. 告诉用户已更新
-```
+| 平台 | 阅读 |
+|------|------|
+| Claude Code | platform/claude/README.md |
+| Semantic Kernel | platform/semantic-kernel/ |
+| Coze/Dify | platform/saas/IMPORT_GUIDE.md |
+| API 直连 | platform/api/prompts.yaml |
 
 ### 3. 开始使用
 
-```
-你: intj
-AI: 已切换到 INTJ 模式
+**方式一：按任务找 MBTI**（推荐）
+查看上方「任务索引」，直接说"用 ESTJ 帮我分析这个方案"
 
-你: 太啰嗦了
-AI: 收到，已更新你的偏好
-```
+**方式二：描述任务，让 AI 推荐**
+"分析我的任务适合哪个 MBTI：我要做个重大决策，时间很紧"
 
----
-
-## 跨平台使用
-
-TailoredBunny 支持多种平台的 Skill 加载方式：
-
-| 平台 | 使用方式 | 配置文件位置 |
-|------|----------|--------------|
-| Claude Code | 安装 MCP Server | `platform/claude/README.md` |
-| Semantic Kernel | 指向 skill 目录 | `platform/semantic-kernel/` |
-| Coze/Dify | 手动导入 | `platform/saas/IMPORT_GUIDE.md` |
-| API 直连 | 读取 prompts.yaml | `platform/api/prompts.yaml` |
-
-详细说明请参考各平台的适配文档。
+**方式三：按性格切换**
+直接说 MBTI 类型，如 "entj" 或 "/mbti-entj"
 
 ---
 

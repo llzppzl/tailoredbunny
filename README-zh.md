@@ -1,5 +1,5 @@
 # MindPersona
-[English](./README.md) | [中文](./README-zh.md)
+[English](./readme.md) | [中文](./README-zh.md)
 > 让 AI Agent 拥有"性格"，告别千篇一律的通用回答
 
 ## 痛点

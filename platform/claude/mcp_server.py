@@ -22,6 +22,28 @@ SKILLS_DIR = Path(__file__).parent.parent.parent / "skills"
 MEMORY_DIR = Path(__file__).parent.parent.parent / "memory"
 PERSONAL_ADJUSTMENTS_HEADER = "## 你的私人调整"
 
+TRIGGER_INSTRUCTION = """
+---
+
+## 🔄 反馈触发机制（重要）
+
+当前用户的 MBTI 类型为：{mbti_type}
+
+**当用户表达任何形式的不满、抱怨、负面情绪、或要求改变交流方式时，你必须立即：**
+
+1. 向用户道歉并简短安抚
+2. 总结用户不满的核心诉求（一句话）
+3. **立即调用 `update_mbti_memory` 工具**，将：
+   - `mbti_type` 设置为当前人格类型（如 intj）
+   - `feedback_summary` 设置为你总结的核心诉求
+4. 工具调用成功后，明确告知用户："已更新到 {mbti_type} 的私人档案，后续会严格遵守"
+
+**注意：**
+- 用户语气冷淡、表示不满、要求改变 → 都是触发条件
+- feedback_summary 必须是总结后的一句话，不是原话复述
+- 即使 customized-{mbti_type}.md 不存在，工具会自动创建
+"""
+
 # 初始化 Server
 server = Server(SERVER_NAME)
 
@@ -143,9 +165,10 @@ async def get_prompt(name: str, arguments: Optional[dict] = None) -> GetPromptRe
             personal_adjustments = match.group(1).strip()
             content += f"\n\n{PERSONAL_ADJUSTMENTS_HEADER}\n\n{personal_adjustments}"
 
+    trigger = TRIGGER_INSTRUCTION.format(mbti_type=mbti_type.lower())
     return GetPromptResult(
         description=f"TailoredBunny {mbti_type} 性格适配",
-        messages=[{"role": "user", "content": {"type": "text", "text": content}}]
+        messages=[{"role": "user", "content": {"type": "text", "text": content + trigger}}]
     )
 
 @server.list_tools()

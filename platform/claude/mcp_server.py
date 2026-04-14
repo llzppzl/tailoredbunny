@@ -10,6 +10,7 @@ TailoredBunny MCP Server
 
 import os
 import re
+from datetime import datetime
 from pathlib import Path
 from typing import Optional
 from mcp.server import Server
@@ -19,6 +20,7 @@ from mcp.types import Prompt, GetPromptResult, Tool, CallToolResult, TextContent
 SERVER_NAME = "tailoredbunny"
 SKILLS_DIR = Path(__file__).parent.parent.parent / "skills"
 MEMORY_DIR = Path(__file__).parent.parent.parent / "memory"
+PERSONAL_ADJUSTMENTS_HEADER = "## 你的私人调整"
 
 # 初始化 Server
 server = Server(SERVER_NAME)
@@ -46,7 +48,7 @@ CUSTOMIZED_TEMPLATE = """# {mbti_type} 进化版 - 你的私人部分
 <!-- 此文件与 skills/mbti-{mbti_type_lower}.md 合并 -->
 <!-- 当用户给反馈时，AI 必须更新此文件 -->
 
-## 你的私人调整
+{HDR}
 
 <!-- 格式：(时间) 反馈内容 -->
 - [{timestamp}] {feedback_summary}
@@ -54,14 +56,14 @@ CUSTOMIZED_TEMPLATE = """# {mbti_type} 进化版 - 你的私人部分
 
 def get_customized_template(mbti_type: str, feedback_summary: str) -> str:
     """生成 customized-{type}.md 的初始内容"""
-    from datetime import datetime
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M")
-    return CUSTOMIZED_TEMPLATE.format(
+    result = CUSTOMIZED_TEMPLATE.format(
         mbti_type=mbti_type.upper(),
         mbti_type_lower=mbti_type.lower(),
         timestamp=timestamp,
         feedback_summary=feedback_summary
     )
+    return result.replace("{HDR}", PERSONAL_ADJUSTMENTS_HEADER)
 
 def append_to_customized(mbti_type: str, feedback_summary: str) -> tuple[bool, str]:
     """
@@ -71,7 +73,6 @@ def append_to_customized(mbti_type: str, feedback_summary: str) -> tuple[bool, s
     mbti_lower = mbti_type.lower()
     customized_file = MEMORY_DIR / f"customized-{mbti_lower}.md"
 
-    from datetime import datetime
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M")
     new_entry = f"- [{timestamp}] {feedback_summary}\n"
 
@@ -81,19 +82,19 @@ def append_to_customized(mbti_type: str, feedback_summary: str) -> tuple[bool, s
             content = get_customized_template(mbti_type, feedback_summary)
             customized_file.write_text(content, encoding="utf-8")
         else:
-            # 文件存在，追加到 ## 你的私人调整 部分
+            # 文件存在，追加到 PERSONAL_ADJUSTMENTS_HEADER 部分
             content = customized_file.read_text(encoding="utf-8")
 
-            # 检查是否已有 ## 你的私人调整 部分
-            if "## 你的私人调整" in content:
+            # 检查是否已有 PERSONAL_ADJUSTMENTS_HEADER 部分
+            if PERSONAL_ADJUSTMENTS_HEADER in content:
                 # 追加到该部分末尾（下一行）
                 content = content.replace(
-                    "## 你的私人调整\n",
-                    f"## 你的私人调整\n{new_entry}"
+                    f"{PERSONAL_ADJUSTMENTS_HEADER}\n",
+                    f"{PERSONAL_ADJUSTMENTS_HEADER}\n{new_entry}"
                 )
             else:
-                # 没有 ## 你的私人调整，追加到文件末尾
-                content = content.rstrip() + f"\n\n## 你的私人调整\n\n{new_entry}"
+                # 没有 PERSONAL_ADJUSTMENTS_HEADER，追加到文件末尾
+                content = content.rstrip() + f"\n\n{PERSONAL_ADJUSTMENTS_HEADER}\n\n{new_entry}"
 
             customized_file.write_text(content, encoding="utf-8")
 
@@ -136,11 +137,11 @@ async def get_prompt(name: str, arguments: Optional[dict] = None) -> GetPromptRe
     customized_file = MEMORY_DIR / f"customized-{mbti_type.lower()}.md"
     if customized_file.exists():
         customized = customized_file.read_text(encoding="utf-8")
-        # 提取 ## 你的私人调整 部分
-        match = re.search(r"## 你的私人调整\s*\n(.*?)$", customized, re.DOTALL | re.MULTILINE)
+        # 提取 PERSONAL_ADJUSTMENTS_HEADER 部分
+        match = re.search(rf"{PERSONAL_ADJUSTMENTS_HEADER}\s*\n(.*?)$", customized, re.DOTALL | re.MULTILINE)
         if match:
             personal_adjustments = match.group(1).strip()
-            content += f"\n\n## 你的私人调整\n\n{personal_adjustments}"
+            content += f"\n\n{PERSONAL_ADJUSTMENTS_HEADER}\n\n{personal_adjustments}"
 
     return GetPromptResult(
         description=f"TailoredBunny {mbti_type} 性格适配",

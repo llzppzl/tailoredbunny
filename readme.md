@@ -1,142 +1,142 @@
 # MindPersona
 
-> 让 AI Agent 拥有"性格"，告别千篇一律的通用回答
+> Give your AI Agent a "personality" — stop settling for generic responses
 
-## 痛点
+## Pain Points
 
-1. **你是一个"效率至上、直奔主题"的实干派**
-   你遇到的问题：马上要开会了，你需要快速确定一个方案的优缺点。你把问题抛给 AI，结果它给你端上了一篇"八股文"：先来两百字行业背景，中间穿插各种"然而、不可否认"，最后再叠个甲"具体情况需具体分析"。看着这些车轱辘话，你不仅觉得浪费时间，甚至血压微升。为了防止它说废话，你现在每次提问都得反复强调"不要敬语、不要免责声明、只输出数据表格"，沟通成本高得惊人。
-   你需要的是：一个**"冷酷幕僚"**式的 Agent。它懂得不端水、不废话，能直接甩出"选 A 风险是 30%，选 B 能省 5 万，建议执行 B"的精准结论。
+1. **You are a "get-things-done, straight-to-the-point" type**
+   Your problem: It's meeting time, you need to quickly assess pros and cons of a plan. You throw the question to AI, and it serves you a formulaic essay: 200 words of industry background, sprinkled with "however, admittedly," and finally a disclaimer "specific situations require specific analysis." Watching this runaround wastes your time and spikes your blood pressure. Now you have to repeatedly emphasize "no formalities, no disclaimers, data tables only" for every query — communication overhead is exhausting.
+   What you need: A **"Cold Chief of Staff"** style Agent. It knows not to hedge, not to waste words, and delivers precise conclusions like "Option A has 30% risk, Option B saves 50K, recommend B."
 
-2. **你是一个"容易内耗、需要正反馈"的高敏人群**
-   你遇到的问题：今天状态极差，工作堆成山但大脑完全宕机，你在焦虑和轻微自责中向 AI 求助该怎么办。结果它瞬间甩给你一个精确到半小时的"完美日程表"，还让你立刻开启"番茄工作法"。面对这个冰冷的指令，你的窒息感瞬间涌上来，不仅没有半点执行的动力，反而更想逃避了。在那个脆弱的当下，机器的"绝对理性"反而变成了一种无形的压力。
-   你需要的是：一个**"知心搭档"**式的 Agent。它能先接住你的情绪，告诉你"今天状态不好没关系"，然后帮你把庞大的任务拆解成一个极小、毫无压力的微任务，慢慢哄着你启动。
+2. **You are a "high-sensitive person who needs positive reinforcement"**
+   Your problem: Feeling terrible today, work piling up, brain completely crashed. You reach out to AI for help. It instantly dumps a half-hour-by-half-hour "perfect schedule" and tells you to start the Pomodoro technique immediately. Facing these cold commands, your suffocation kicks in — no motivation to execute, just more desire to escape. In that vulnerable moment, the machine's "absolute rationality" becomes invisible pressure.
+   What you need: A **"Trusted Partner"** style Agent. It catches your emotions first, tells you "it's okay to have a bad day," then breaks tasks into tiny, pressure-free micro-tasks, coaxing you to start.
 
-3. **你是一个"思维跳跃、想到哪说哪"的发散型创作者**
-   你遇到的问题：你脑子里突然蹦出一个绝妙但极其碎片化的灵感。你激动地把这堆天马行空的想法发给 AI，希望它能跟你碰撞一下。结果因为它接不住这种"散装表达"，直接给你降级成了一篇干巴巴的常规提纲。看着那堆平庸的套话，你甚至开始怀疑自己："是不是我表达能力太差？是不是我的 Prompt 写得不对？"明明只是想聊个创意，却硬生生被逼着去学怎么写结构化的提示词。
-   你需要的是：一个**"灵感翻译官"**式的 Agent。它能懂你的发散脑回路，接住你的碎片信息，主动帮你理清逻辑线头，而不是要求你一开始就提供完美的指令。
+3. **You are a "think randomly, brainstorm out loud" type creator**
+   Your problem: A brilliant but extremely fragmented idea pops into your head. You excitedly send this wild bunch of thoughts to AI hoping for a collision. But since it can't handle this "loose expression," it downgrades you to a bland conventional outline. Watching those generic phrases, you start doubting yourself: "Is my expression too poor? Is my Prompt written wrong?" You just wanted to chat about an idea, but got forced to learn structured prompt writing.
+   What you need: An **"Idea Translator"** style Agent. It understands your divergent thinking, catches your fragmented input, actively helps sort out logical threads — instead of demanding perfectly formed instructions from the start.
 
-4. **你是一个"计划做满分，执行常卡壳"的灵活应变者**
-   你遇到的问题：用 AI 做规划时体验极佳，它总能给你出一份无懈可击的执行方案。但只要一到落地环节，你马上就会卡壳。因为你的工作习惯就是边做边改，容易被突发事件打断。而现在的 AI 只管"把计划生成完"，一旦你昨天没按时完成任务，那个完美的计划表今天就成了一张废纸。它不会在执行中途拽你一把，也不会根据你的进度做任何动态调整。
-   你需要的是：一个**"敏捷教练"**式的 Agent。计划再好不如能落地，你需要它在你卡壳时及时调整路线，在你偏航时拉你一把，提供一种"动态陪伴"的执行护栏，而不是一次性抛出个死板的表格。
-
----
-
-## 问题 (Problem)
-
-通用 Agent 就像"没有性格的端水大师"——对所有人都不犯错，但对特定性格的人来说，要么太糙、太死板、太冷漠、太抽象。
-
-**本质**：大模型的 RLHF 对齐追求"最大公约数"，与用户极度分化的认知模型（MBTI）严重错配。
-
-## 解决方案 (Solution)
-
-**MBTI 三层映射法则** — 从三个技术层次实现个人认知对齐：
-
-| 层次 | 技术手段 | 匹配的 MBTI 维度 |
-|------|----------|------------------|
-| 交互层 | System Prompt + 模板约束 | S/N（格式）、T/F（语气） |
-| 架构层 | Workflow + Multi-Agent | J/P（执行推进） |
-| 记忆层 | Memory + RAG | 全性格通用 |
-
-### 交互层：解决"怎么说话"
-
-| 类型 | 内容格式 | 沟通语气 |
-|------|----------|----------|
-| S型 | 具体数据、历史案例、表格 | 务实执行者 |
-| N型 | 宏大愿景、底层逻辑、思维导图 | 战略幕僚 |
-| T型 | 冷酷逻辑、直击痛点 | 无情批评家 |
-| F型 | 情绪价值，理解包容 | 高共情倾听者 |
-
-### 架构层：解决"怎么干活"
-
-| 类型 | 工作流风格 | Agent 角色 |
-|------|------------|------------|
-| J型 | WBS 瀑布流，节点验收 | 机床：按序填充 |
-| P型 | 敏捷迭代，发散-收敛双路 | 护栏：防偏强行切分 |
-
-### 记忆层：解决"记住你是谁"
-
-沉淀"雷区"、"北极星指标"，消除重复调教成本。
-
-**通用记忆（skills/mbti-*.md）**：基于 MBTI 理论的典型偏好
-**个人进化（memory/customized-*.md）**：用户实际反馈累积，个性化调整
+4. **You are a "perfect planner, always stuck at execution" flexible responder**
+   Your problem: Using AI for planning is excellent — it always delivers flawless execution plans. But the moment you start doing, you get stuck. Because your work habit is to iterate while doing, easily derailed by unexpected events. Yet current AI only focuses on "generating the perfect plan" — if you didn't complete yesterday's task, that perfect schedule becomes useless today. It won't pull you back mid-execution or adjust based on your progress.
+   What you need: An **"Agile Coach"** style Agent. Plans are worthless without execution. You need it to adjust course when you're stuck, pull you back when you drift, providing "dynamic companionship" as an execution guardrail — instead of dumping a rigid table at once.
 
 ---
 
-## 任务索引
+## Problem
 
-| 你的任务 | 描述 | 推荐 MBTI |
-|----------|------|-----------|
-| 执行输出 | 快速出结果（ESTJ）/ 推动他人行动（ENTJ）/ 按规则执行不出错（ISTJ） | ESTJ / ENTJ / ISTJ |
-| 目标拆解 | 战略拆解，定阶段和里程碑（ENTJ）/ 排期+每日任务（ESTJ）/ 设验收标准（ISTJ） | ENTJ / ESTJ / ISTJ |
-| 选项分析 | 利弊对比，给出判断（INTJ）/ 找逻辑漏洞（INTP） | INTJ / INTP |
-| 决策拍板 | 防止过度纠结，直接推着人走 | ENTJ |
-| 情绪缓冲 | 情感接住，不给方案（INFP）/ 陪伴共情，当下的（ISFP） | INFP / ISFP |
-| 灵感发散 | 打开脑洞（ENFP）/ 连接碰撞，发现对立（ENTP）/ 回归个人意义（INFP） | ENFP / ENTP / INFP |
-| 逻辑解析 | 因果分析，矛盾识别（INTP）/ 批判检验，攻击结论（INTJ）/ 链条追溯（ISTP） | INTP / INTJ / ISTP |
-| 认知压缩 | 结构化提炼，减法整理（ISTJ）/ 抓优先级（INTJ） | ISTJ / INTJ |
-| 成长激励 | 连接个人与愿景，找到做一件事的意义和动力 | ENFJ |
+Generic Agents are like "diplomats with no personality" — they don't make mistakes for anyone, but for people with specific personality types, they're either too rough, too rigid, too cold, or too abstract.
+
+**Root cause**: LLMs' RLHF alignment pursues the "greatest common divisor," which is severely misaligned with users' highly differentiated cognitive models (MBTI).
+
+## Solution
+
+**MBTI Three-Layer Mapping Framework** — achieving personal cognitive alignment through three technical layers:
+
+| Layer | Technical Approach | Matched MBTI Dimension |
+|-------|-------------------|------------------------|
+| Interaction | System Prompt + Template Constraints | S/N (format), T/F (tone) |
+| Architecture | Workflow + Multi-Agent | J/P (execution push) |
+| Memory | Memory + RAG | Universal for all personalities |
+
+### Interaction Layer: How to Speak
+
+| Type | Content Format | Communication Tone |
+|------|---------------|-------------------|
+| S-type | Specific data, historical cases, tables | Pragmatic executor |
+| N-type | Grand visions, underlying logic, mind maps | Strategic advisor |
+| T-type | Cold logic, hitting pain points | Ruthless critic |
+| F-type | Emotional value, understanding & acceptance | Highly empathetic listener |
+
+### Architecture Layer: How to Get Things Done
+
+| Type | Workflow Style | Agent Role |
+|------|--------------|------------|
+| J-type | WBS waterfall with node acceptance | Machine: fill in sequence |
+| P-type | Agile iteration, diverge-converge dual track | Guardrail: prevent derailment |
+
+### Memory Layer: Remember Who You Are
+
+Accumulate "minefields" and "north star metrics" to eliminate repeated tuning costs.
+
+**Universal Memory (skills/mbti-*.md)**: Based on MBTI theory's typical preferences
+**Personal Evolution (memory/customized-*.md)**: User feedback accumulation, personalized adjustments
 
 ---
 
-## 核心公式 (Summary)
+## Task Index
+
+| Your Task | Description | Recommended MBTI |
+|-----------|-------------|-----------------|
+| Execution Output | Quick results (ESTJ) / Drive others (ENTJ) / Execute by rules (ISTJ) | ESTJ / ENTJ / ISTJ |
+| Goal Breakdown | Strategic decomposition (ENTJ) / Scheduling + daily tasks (ESTJ) / Acceptance criteria (ISTJ) | ENTJ / ESTJ / ISTJ |
+| Option Analysis | Compare pros/cons, give judgment (INTJ) / Find logical flaws (INTP) | INTJ / INTP |
+| Decision Making | Prevent overthinking, push forward | ENTJ |
+| Emotional Buffer | Catch feelings first, no solutions (INFP) / Companionship (ISFP) | INFP / ISFP |
+| Ideation | Open mind (ENFP) / Connect & collide, find opposites (ENTP) / Connect to personal meaning (INFP) | ENFP / ENTP / INFP |
+| Logic Analysis | Causal analysis (INTP) / Critical examination (INTJ) / Trace chains (ISTP) | INTP / INTJ / ISTP |
+| Cognitive Compression | Structured distillation (ISTJ) / Prioritization (INTJ) | ISTJ / INTJ |
+| Growth Motivation | Connect personal vision, find meaning and motivation | ENFJ |
+
+---
+
+## Core Formula
 
 ```
-诊断 MBTI → 配置交互格式与语气 (S/N + T/F)
-         → 搭建顺应天性或弥补短板的工作流 (J/P)
-         → 固化进长期记忆层（memory/customized-{mbti}.md）
+Diagnose MBTI → Configure interaction format & tone (S/N + T/F)
+             → Build workflow that顺着天性 or 弥补短板 (J/P)
+             → Solidify into long-term memory (memory/customized-{mbti}.md)
 ```
 
-> 不要试图让 AI 适应所有人，用这套框架，让 AI 只臣服于你。
+> Don't try to make AI adapt to everyone. Use this framework to make AI obey only you.
 
 ---
 
-## 🚀 快速开始
+## 🚀 Quick Start
 
-### 1. 下载项目
+### 1. Clone the Project
 
 ```bash
 git clone <repo-url>
 cd mindpersona
 ```
 
-### 2. 选择你的平台
+### 2. Choose Your Platform
 
-| 平台 | 阅读 |
-|------|------|
+| Platform | Reference |
+|----------|-----------|
 | Claude Code | platform/claude/README.md |
 | Semantic Kernel | platform/semantic-kernel/ |
 | Coze/Dify | platform/saas/IMPORT_GUIDE.md |
-| API 直连 | platform/api/prompts.yaml |
+| API Direct | platform/api/prompts.yaml |
 
-### 3. 开始使用
+### 3. Start Using
 
-**方式一：按任务找 MBTI**（推荐）
-查看上方「任务索引」，直接说"用 ESTJ 帮我分析这个方案"
+**Method 1: Find MBTI by Task** (Recommended)
+See the "Task Index" above, just say "Use ESTJ to analyze this plan"
 
-**方式二：描述任务，让 AI 推荐**
-"分析我的任务适合哪个 MBTI：我要做个重大决策，时间很紧"
+**Method 2: Describe Task, Let AI Recommend**
+"Analyze which MBTI fits my task: I'm making a major decision with limited time"
 
-**方式三：按性格切换**
-直接说 MBTI 类型，如 "entj" 或 "/mbti-entj"
-
----
-
-## 📁 文件结构
-
-| 文件/目录 | 用途 |
-|-----------|------|
-| `CLAUDE.md` | 项目指令（AI 自动加载） |
-| `skills/mbti-*.md` | 通用 baseline（16种 MBTI） |
-| `memory/customized-*.md` | 你的私人进化版（本地，不上传 git） |
-| `platform/` | 跨平台适配层 |
-| `platform/claude/` | Claude MCP Server 适配 |
-| `platform/semantic-kernel/` | Semantic Kernel 框架适配 |
-| `platform/saas/` | SaaS 平台（Coze/Dify）导入指南 |
-| `platform/api/` | API 直连提示词索引 |
+**Method 3: Switch by Personality Type**
+Just say the MBTI type, like "entj" or "/mbti-entj"
 
 ---
 
-## 支持的 MBTI 类型
+## 📁 File Structure
+
+| File/Directory | Purpose |
+|---------------|---------|
+| `CLAUDE.md` | Project instructions (auto-loaded by AI) |
+| `skills/mbti-*.md` | Universal baseline (16 MBTI types) |
+| `memory/customized-*.md` | Your personal evolution (local, not uploaded to git) |
+| `platform/` | Cross-platform adaptation layer |
+| `platform/claude/` | Claude MCP Server adapter |
+| `platform/semantic-kernel/` | Semantic Kernel framework adapter |
+| `platform/saas/` | SaaS platform (Coze/Dify) import guide |
+| `platform/api/` | API direct prompt index |
+
+---
+
+## Supported MBTI Types
 
 INTJ, INFP, INTP, INFJ, ISTJ, ISFJ, ISTP, ISFP, ENTJ, ENTP, ENFJ, ENFP, ESTJ, ESTP, ESFJ, ESFP

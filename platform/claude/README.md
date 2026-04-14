@@ -1,8 +1,8 @@
-# TailoredBunny MCP Server
+# MindPersona MCP Server
 
 ## 概述
 
-TailoredBunny MCP Server 允许你在 Claude Code 中使用 MBTI 性格适配 Prompt。
+MindPersona MCP Server 允许你在 Claude Code 中使用 MBTI 性格适配 Prompt。
 
 ## 安装步骤
 
@@ -29,10 +29,10 @@ TailoredBunny MCP Server 允许你在 Claude Code 中使用 MBTI 性格适配 Pr
    **运行以下命令（请替换路径）：**
    ```bash
    # 用户级安装（所有项目可用）
-   claude mcp add tailoredbunny -s user -- python 【mcp_server.py的绝对路径】
+   claude mcp add mindpersona -s user -- python 【mcp_server.py的绝对路径】
 
    # 或项目级安装（仅当前项目可用，可共享给团队）
-   claude mcp add tailoredbunny -s project -- python 【mcp_server.py的绝对路径】
+   claude mcp add mindpersona -s project -- python 【mcp_server.py的绝对路径】
    ```
 
 3. 重启 Claude Code（或关闭当前窗口后重新打开）

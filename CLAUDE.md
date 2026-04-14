@@ -1,4 +1,4 @@
-# TailoredBunny - AI 性格适配
+# MindPersona - AI 性格适配
 
 ## 核心规则
 

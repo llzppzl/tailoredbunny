@@ -1,11 +1,11 @@
-# Contributing to TailoredBunny
+# Contributing to MindPersona
 
 ## 开发环境
 
 ```bash
 # 克隆项目
 git clone <repository-url>
-cd tailoredbunny
+cd mindpersona
 
 # 安装依赖 (如有)
 pip install -e .

@@ -1,8 +1,8 @@
-# TailoredBunny SaaS 平台导入指南
+# MindPersona SaaS 平台导入指南
 
 ## 概述
 
-TailoredBunny 是一套基于 MBTI 十六型人格的 AI 性格适配系统。本指南帮助你将 TailoredBunny 的 Prompt 导入到 Coze 和 Dify 等 SaaS 平台。
+MindPersona 是一套基于 MBTI 十六型人格的 AI 性格适配系统。本指南帮助你将 MindPersona 的 Prompt 导入到 Coze 和 Dify 等 SaaS 平台。
 
 ## 支持的平台
 

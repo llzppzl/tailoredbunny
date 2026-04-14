@@ -1,4 +1,4 @@
-# TailoredBunny
+# MindPersona
 
 > 让 AI Agent 拥有"性格"，告别千篇一律的通用回答
 
@@ -97,7 +97,7 @@
 
 ```bash
 git clone <repo-url>
-cd tailoredbunny
+cd mindpersona
 ```
 
 ### 2. 选择你的平台

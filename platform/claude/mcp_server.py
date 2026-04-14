@@ -1,5 +1,5 @@
 """
-TailoredBunny MCP Server
+MindPersona MCP Server
 为 Claude Code 提供 MBTI 性格适配 prompt
 
 使用方法：
@@ -61,7 +61,7 @@ def scan_skills() -> list[dict]:
             prompts.append({
                 "type": mbti_type,
                 "filepath": filepath,
-                "description": f"TailoredBunny {mbti_type} 性格适配"
+                "description": f"MindPersona {mbti_type} 性格适配"
             })
     return prompts
 
@@ -177,7 +177,7 @@ async def get_prompt(name: str, arguments: Optional[dict] = None) -> GetPromptRe
 
     trigger = TRIGGER_INSTRUCTION.format(mbti_type=mbti_type.lower())
     return GetPromptResult(
-        description=f"TailoredBunny {mbti_type} 性格适配",
+        description=f"MindPersona {mbti_type} 性格适配",
         messages=[{"role": "user", "content": {"type": "text", "text": content + trigger}}]
     )
 

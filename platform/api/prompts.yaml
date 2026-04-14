@@ -1,8 +1,8 @@
-# TailoredBunny API 提示词索引
+# MindPersona API 提示词索引
 # 用于 API 直连模式下的提示词发现和加载
 
 version: "1.0"
-description: "TailoredBunny MBTI 性格适配提示词索引"
+description: "MindPersona MBTI 性格适配提示词索引"
 
 prompts:
   - id: "mbti-intj"

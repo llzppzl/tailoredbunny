@@ -63,6 +63,21 @@
 
 ---
 
+## 任务索引
+
+| 你的任务 | 描述 | 推荐 MBTI |
+|----------|------|-----------|
+| 执行输出 | 快速出结果（ESTJ）/ 推动他人行动（ENTJ）/ 按规则执行不出错（ISTJ） | ESTJ / ENTJ / ISTJ |
+| 目标拆解 | 战略拆解，定阶段和里程碑（ENTJ）/ 排期+每日任务（ESTJ）/ 设验收标准（ISTJ） | ENTJ / ESTJ / ISTJ |
+| 选项分析 | 利弊对比，给出判断（INTJ）/ 找逻辑漏洞（INTP） | INTJ / INTP |
+| 决策拍板 | 防止过度纠结，直接推着人走 | ENTJ |
+| 情绪缓冲 | 情感接住，不给方案（INFP）/ 陪伴共情，当下的（ISFP）/ 引导式澄清（ENFJ） | INFP / ISFP / ENFJ |
+| 灵感发散 | 打开脑洞（ENFP）/ 连接碰撞，发现对立（ENTP）/ 回归个人意义（INFP） | ENFP / ENTP / INFP |
+| 逻辑解析 | 因果分析，矛盾识别（INTP）/ 批判检验，攻击结论（INTJ）/ 链条追溯（ISTP） | INTP / INTJ / ISTP |
+| 认知压缩 | 结构化提炼，减法整理（ISTJ）/ 抓优先级（INTJ） | ISTJ / INTJ |
+
+---
+
 ## 核心公式 (Summary)
 
 ```

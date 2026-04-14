@@ -1,11 +1,11 @@
 """
 TailoredBunny MCP Server
-为 Claude Desktop 提供 MBTI 性格适配 prompt
+为 Claude Code 提供 MBTI 性格适配 prompt
 
 使用方法：
 1. pip install -r requirements.txt
-2. 配置 claude_desktop_config.json
-3. 重启 Claude Desktop
+2. 配置 MCP Server（见 README.md）
+3. 重启 Claude Code
 """
 
 import os
